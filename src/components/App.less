@@ -1,0 +1,47 @@
+//引用外部css的方法
+.app-img {
+	composes: img_style1 from '../../sample.css';
+}
+
+.loading {
+	background: red;
+	color: white;
+}
+
+.current {
+	color: red;
+	font-size: 20px;
+}
+
+.mainbox {
+	margin-bottom: 30px;
+	border: 3px dashed #336699;
+	padding: 20px;
+}
+
+.app {
+	@clr: blue;
+
+  text-size-adjust: none;
+  font-family: helvetica, arial, sans-serif;
+  line-height: 200%;
+  padding: 6px 20px 30px;
+
+	&::first-letter {
+		color: @clr;
+	}
+
+	&::before {
+		content: '';
+		display: block;
+		width: 300px;
+		height: 100px;
+		background: url('../images/logo.png') no-repeat 0 0;
+	}
+
+	img {
+		height: 100px;
+		width: 100%;
+		display: block;
+	}
+}
