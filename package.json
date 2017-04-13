@@ -1,6 +1,6 @@
 {
   "name": "mobx-react-proj-starter",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "mobx+react+react_router_4+webpack2+mock_api",
   "main": "dist/index.html",
   "scripts": {

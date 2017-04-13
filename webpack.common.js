@@ -42,7 +42,6 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader?modules',
-          'less-loader',
           {
             loader: 'postcss-loader',
             options: {
@@ -52,7 +51,8 @@ module.exports = {
                   ];
               }
             }
-          }
+          },
+          'less-loader'
         ],
       },
       {
