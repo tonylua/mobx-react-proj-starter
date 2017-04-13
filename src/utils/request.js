@@ -62,6 +62,7 @@ export default {
 				return result;
 			}).catch(ex=>{
 				console.warn(ex.message);
+				AppState.setRequesting(false);
 			});
 	},
 	get(...args) {
