@@ -1,6 +1,6 @@
 {
   "name": "mobx-react-proj-starter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "mobx+react+react_router_4+webpack2+mock_api",
   "main": "dist/index.html",
   "scripts": {
@@ -37,6 +37,7 @@
     "body-parser": "^1.17.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
+    "cross-env": "^4.0.0",
     "express": "^4.15.2",
     "file-loader": "^0.11.1",
     "html-webpack-plugin": "^2.28.0",
