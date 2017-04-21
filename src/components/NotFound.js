@@ -3,7 +3,7 @@ import { isArray } from 'lodash';
 import { exists } from 'dotty';
 import { Link } from 'react-router-dom';
 
-const NotFound = ({location})=>(
+const NotFound = ({history, location})=>(
 	<div>
 		{
 			location && exists(location, 'state.message') 
@@ -12,6 +12,7 @@ const NotFound = ({location})=>(
 		}
 		<br/>
 		<ul>
+			<li><Link to="/" onClick={e=>history.goBack()}>back to last page</Link></li>
 			<li><Link replace={true} to="/">back to main</Link></li>
 		{
 			(location 
