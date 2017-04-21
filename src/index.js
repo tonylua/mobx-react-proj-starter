@@ -3,7 +3,13 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
 import App from './components/App';
-// import './global.less';
+
+import './global.less';
+
+import '../node_modules/roboto-fontface/fonts/Roboto/Roboto-Regular.eot';
+import '../node_modules/roboto-fontface/fonts/Roboto/Roboto-Regular.woff';
+import '../node_modules/roboto-fontface/fonts/Roboto/Roboto-Regular.woff2';
+import '../node_modules/roboto-fontface/fonts/Roboto/Roboto-Regular.ttf';
 
 const render = (Component) => {
   ReactDOM.render(
