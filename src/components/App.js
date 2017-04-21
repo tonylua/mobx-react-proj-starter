@@ -37,7 +37,7 @@ const App = observer(() =>
 	  </div>
 	  <footer>
 	    <img className={styles['app-img']} src={img1} />
-	    <Link to="/">back to main</Link>
+	    <Link to="/" data-tooltip="~back to main~" className={"tooltip " + styles.tooltip}>back to main</Link>
 	  </footer>
 	</div>
   </Router>

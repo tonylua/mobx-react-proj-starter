@@ -41,7 +41,7 @@ module.exports = {
         test: /\.(css|less)$/,
         use: [
           'style-loader',
-          'css-loader?modules',
+          'css-loader?modules&importLoaders=2', //被其他2个预处理
           {
             loader: 'postcss-loader',
             options: {

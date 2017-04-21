@@ -1,11 +1,22 @@
+@import '../vars.less';
+
+time {
+	color: @color-link;
+}
+
 //引用外部css的方法
 .app-img {
-	composes: img_style1 from '../../sample.css';
+	composes: img_style1 from '../global.less';
 }
 
 .loading {
 	background: red;
 	color: white;
+}
+
+.tooltip {
+	position: relative;
+	top: -2px;
 }
 
 .current {

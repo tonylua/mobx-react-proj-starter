@@ -1,15 +1,5 @@
-@font-face { //需要在index.js中import
-	font-family: 'Roboto';
-	src: url('../node_modules/roboto-fontface/fonts/Roboto/Roboto-Regular.eot'); /* IE9 Compat Modes */
-	src: url('../node_modules/roboto-fontface/fonts/Roboto/Roboto-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-	   url('../node_modules/roboto-fontface/fonts/Roboto/Roboto-Regular.woff2') format('woff2'), /* Super Modern Browsers */
-	   url('../node_modules/roboto-fontface/fonts/Roboto/Roboto-Regular.woff') format('woff'), /* Pretty Modern Browsers */
-	   url('../node_modules/roboto-fontface/fonts/Roboto/Roboto-Regular.ttf')  format('truetype'); /* Safari, Android, iOS */
-	font-weight: normal;
-	font-style: normal;
-}
+@import 'vars.less';
 
-@font-family: Roboto, "Hiragino Sans GB", "Microsoft YaHei", SimHei, sans-serif;
 
 body {
 	@f: 20px;
@@ -17,4 +7,54 @@ body {
 	font-family: @font-family;
 	font-size: @f;
 	color: #333;
+}
+
+a {
+	color: @color-link;
+}
+
+.img_style1 {
+	border: 3px solid #eee;
+}
+
+:global .tooltip {
+	@bg: #2C303B;
+
+	display: inline-block;
+    position: relative;
+    text-decoration: none;
+    opacity: 1;
+    margin-left: 2px;
+
+    &::after {
+	    content: attr(data-tooltip);
+	    bottom: 27px;
+	    background: @bg;
+	    color: @color-blank;
+	    padding: 5px 15px;
+	    white-space: nowrap;
+	    text-indent: 0;
+	    box-shadow: 0 1px 0 #2d303a;
+	}
+	&::before {
+		content: '';
+		bottom: 20px;
+		display: inline-block;
+		border-style: solid;
+		border-width: 3px 5px;
+		border-color: @bg @bg transparent transparent;
+
+	}
+	&::after,
+	&::before {
+	    display: inline-block;
+	    right: 10px;
+		position: absolute;
+		opacity: 0;
+	    transition: all 0.5s ease;
+	}
+	&:hover::before,
+	&:hover::after {
+	    opacity: 1;
+	}
 }
