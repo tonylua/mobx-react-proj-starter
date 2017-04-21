@@ -44,3 +44,17 @@ requestUtil.post('/cities', data).then(result=>{
     //result in response
 });
 ```
+
+## Troubleshooting
+
+### Error: dyld: Library not loaded
+
+When running `npm start`, you get this error...
+
+```
+Module build failed: Error: dyld: Library not loaded: /usr/local/opt/libpng/lib/libpng16.16.dylib
+  Referenced from: /path/to/front-end-stack/node_modules/mozjpeg/vendor/cjpeg
+  Reason: image not found
+```
+
+To fix it, run `brew install libpng` ... [ref](https://raw.githubusercontent.com/choonchernlim/front-end-stack/master/README.md)
