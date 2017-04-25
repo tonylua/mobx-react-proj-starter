@@ -4,9 +4,12 @@
 
 ## scripts
 
-- `npm start` - dev: start devServer
-- `npm run mock` - dev: start mock api server
-- `npm run build` - production: build to /dist
+- dev
+    + `npm start` - hot reload & start devServer (http://127.0.0.1:8080)
+    + `npm run mock` - start a mock api server
+    + `npm run build` - build to /dist
+- prod
+    + `npm run preview` - start a server under /dist(http://127.0.0.1:8080)
 
 ## mock api
 

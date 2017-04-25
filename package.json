@@ -1,12 +1,13 @@
 {
   "name": "mobx-react-proj-starter",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "mobx+react+react_router_4+webpack2+mock_api",
   "main": "dist/index.html",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server",
-    "build": "cross-env NODE_ENV=production PLATFORM=web webpack",
     "mock": "nodemon ./mock.server.js",
+    "build": "cross-env NODE_ENV=production PLATFORM=web webpack --color",
+    "preview": "nodemon ./preview.server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -35,10 +36,12 @@
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-1": "^6.24.1",
     "body-parser": "^1.17.1",
+    "clean-webpack-plugin": "^0.1.16",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "cross-env": "^4.0.0",
     "express": "^4.15.2",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "html-webpack-plugin": "^2.28.0",
     "image-webpack-loader": "^3.3.0",

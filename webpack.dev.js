@@ -35,6 +35,27 @@ module.exports = merge(webpackCommon, {
     historyApiFallback: true
   },
 
+  module: {
+    rules: [
+      {
+        test: /\.less$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          'css-loader?modules&importLoaders=1',
+          'less-loader'
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ],
+      },
+    ],
+  },
+
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.UglifyJsPlugin({

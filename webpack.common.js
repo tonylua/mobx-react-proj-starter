@@ -38,24 +38,6 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(css|less)$/,
-        use: [
-          'style-loader',
-          'css-loader?modules&importLoaders=2', //被其他2个预处理
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: function() {
-                  return [
-                      require('autoprefixer')({broswers:['last 2 versions', , 'IE > 8']})
-                  ];
-              }
-            }
-          },
-          'less-loader'
-        ],
-      },
-      {
         test: /\.(png|jpe?g|gif|svg)$/,
         use: [{
           loader: 'url-loader',
@@ -93,12 +75,6 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module) {
-         return module.context && module.context.indexOf('node_modules') !== -1;
-      }
-	  }),
     new HtmlWebpackPlugin({
       title: 'mobx-react-proj-starter',
       template: './index.html',

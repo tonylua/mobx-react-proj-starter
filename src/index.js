@@ -4,6 +4,7 @@ import { AppContainer } from 'react-hot-loader';
 
 import App from './components/App';
 
+import '../this_is_a_sample_css.css';
 import './global.less';
 
 import '../node_modules/roboto-fontface/fonts/Roboto/Roboto-Regular.eot';
