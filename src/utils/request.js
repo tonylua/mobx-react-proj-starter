@@ -13,7 +13,23 @@ export default {
 	request: method=>(url, params, errCallback)=>{
 		AppState.setRequesting(true);
 
-		const req = new Request(`${mock_prefix}${url}`, {
+		let reqUrl = `${mock_prefix}${url}`;
+		// if (AppState.config) {
+		// 	const rp = AppState.config.requests_proxy;
+		// 	if (!isObject(rp)) return;
+		// 	let re = null;
+		// 	for (let k in rp) {
+		// 		re = new RegExp(k);
+		// 		console.log(url, re);
+		// 		if (re.test(url)) {
+		// 			reqUrl = url.replace(re, rp[k]);
+		// 			console.log(`request: ${url} --> ${reqUrl}`)
+		// 			break;
+		// 		}
+		// 	}
+		// }
+
+		const req = new Request(reqUrl, {
 			method,
 			headers: {
 				'Accept': 'application/json',
@@ -65,26 +81,27 @@ export default {
 				}
 				AppState.setRequesting(false);
 				return result;
-			}).catch(ex=>{
+			})/*.catch(ex=>{
 				console.warn(ex.message);
 				AppState.setRequesting(false);
-			});
+			})*/;
 	},
 	get(...args) {
-		return this.request('GET')(...args).catch(err=>{});
+		return this.request('GET')(...args);
 	},
 	post(...args) {
-		return this.request('POST')(...args).catch(err=>{});
+		return this.request('POST')(...args);
 	},
 	sequence(reqPromises, autoMerge=true) {
 		let results = [];
 		return reqPromises.reduce(
 			(promise, req)=>promise.then(
-				()=>req.then(result=>results.push(result))
+				()=>req.then(result=>results.push(result)).catch(ex=>Promise.reject(ex))
 			), Promise.resolve()
-		).then(()=>autoMerge
-			? results.reduce((rst, curr)=>extend(rst, curr), {})
-			: results
+		).then(
+			()=>autoMerge
+				? results.reduce((rst, curr)=>extend(rst, curr), {})
+				: results
 		);
 	}
 }
