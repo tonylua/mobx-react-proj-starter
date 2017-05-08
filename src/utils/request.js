@@ -1,11 +1,13 @@
 import 'whatwg-fetch';
-import { bind, delay } from 'lodash';
-// import { resolve as PromiseResolve } from 'native-promise-only';
+import Promise from 'native-promise-only';
+import { delay, isObject, extend } from 'lodash';
 import { mock_prefix } from '../../dev.server';
 import AppState from '../stores/AppState';
 
 export const isBadRequest = status=>(status>=400 && status<=600);
-export const isValidCode = code=>{ let c = parseInt(code); return (!isNaN(c)) && (c == 0) };
+export const isValidCode = code=>{
+	let c = parseInt(code); return (!isNaN(c)) && (c == 0)
+};
 
 export default {
 	request: method=>(url, params, errCallback)=>{
@@ -53,6 +55,9 @@ export default {
 							: 0
 					);
 				}
+				if ('app_nav' in result && isObject(result.app_nav)) {
+					AppState.setNav(result.app_nav);
+				}
 				if (!isValidCode(errcode)) {
 					let ex = `bussiness logic wrong (${errcode} "${errmsg}")`;
 					_err(ex, {result});
@@ -71,5 +76,15 @@ export default {
 	post(...args) {
 		return this.request('POST')(...args).catch(err=>{});
 	},
-
+	sequence(reqPromises, autoMerge=true) {
+		let results = [];
+		return reqPromises.reduce(
+			(promise, req)=>promise.then(
+				()=>req.then(result=>results.push(result))
+			), Promise.resolve()
+		).then(()=>autoMerge
+			? results.reduce((rst, curr)=>extend(rst, curr), {})
+			: results
+		);
+	}
 }

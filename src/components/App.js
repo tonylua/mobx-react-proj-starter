@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, NavLink, Link } from 'react-router-dom';
-import { observable } from 'mobx';
 import { Provider, observer, inject } from 'mobx-react';
 
 import NotFound from './NotFound';
@@ -10,22 +9,22 @@ import img1 from '../images/1.jpg';
 
 const App = observer(() => 
   <Provider store={store}>
-  	<Router ref={store.AppState.initRouter}>
-  	<div className={styles.app}>
-  	  {
-  	  	store.AppState.requesting ? <div className={styles.loading}>loading...</div> : null
-  	  }
+	<Router ref={store.AppState.initRouter}>
+	<div className={styles.app}>
+	  {
+		store.AppState.requesting ? <div className={styles.loading}>loading...</div> : null
+	  }
 	  <header>
-	    <time>app is running {store.AppState.run_time}s</time>
-	    <ul>
+		<time>app is running {store.AppState.run_time}s</time>
+		<ul>
 			<li><NavLink exact to="/" activeClassName={styles.current}>main</NavLink></li>
 			<li><NavLink exact to="/cities" activeClassName={styles.current}>cities</NavLink></li>
 			<li><NavLink to="/somewhere" activeClassName={styles.current}>somewhere</NavLink></li>
-	    </ul>
+		</ul>
 	  </header>
 	  <div className={styles.mainbox}>
 		  <Switch>
-		    {/*demo Components*/}
+			{/*demo Components*/}
 			<Route exact path="/" 
 				render={({match})=><div>{`main page: ${match.url}`}</div>} />
 			<Route exact path="/cities" component={Cities} />
@@ -36,8 +35,8 @@ const App = observer(() =>
 		  </Switch>
 	  </div>
 	  <footer>
-	    <img className={styles['app-img']} src={img1} />
-	    <Link to="/" data-tooltip="~back to main~" className={"tooltip " + styles.tooltip}>back to main</Link>
+		<img className={styles['app-img']} src={img1} />
+		<Link to="/" data-tooltip="~back to main~" className={"tooltip " + styles.tooltip}>back to main</Link>
 	  </footer>
 	</div>
   </Router>

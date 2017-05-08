@@ -1,5 +1,4 @@
 import { observable, action } from 'mobx';
-import { noop } from 'lodash';
 
 //just demo, you can delete it
 const init_time = new Date;

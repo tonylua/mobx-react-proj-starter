@@ -13,18 +13,18 @@ import '../node_modules/roboto-fontface/fonts/Roboto/Roboto-Regular.woff2';
 import '../node_modules/roboto-fontface/fonts/Roboto/Roboto-Regular.ttf';
 
 const render = (Component) => {
-  ReactDOM.render(
-    <AppContainer>
-      <Component/>
-    </AppContainer>,
-    document.getElementById('root')
-  );
+	ReactDOM.render(
+		<AppContainer>
+			<Component/>
+		</AppContainer>,
+		document.getElementById('root')
+	);
 };
 
 render(App);
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => {
-    render(App)
-  });
+	module.hot.accept('./components/App', () => {
+		render(App)
+	});
 }

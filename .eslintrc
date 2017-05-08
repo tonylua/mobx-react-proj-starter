@@ -1,0 +1,65 @@
+{
+  "ecmaFeatures": {
+    "globalReturn": true,
+    "jsx": true,
+    "modules": true,
+    "experimentalObjectRestSpread": true
+  },
+
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+
+  "globals": {
+    "document": false,
+    "escape": false,
+    "navigator": false,
+    "unescape": false,
+    "window": false,
+    "describe": true,
+    "before": true,
+    "it": true,
+    "expect": true,
+    "sinon": true
+  },
+
+  "parser": "babel-eslint",
+
+  "plugins": [
+    "react",
+    "babel"
+  ],
+  "extends": [
+    "eslint:recommended",
+    'plugin:react/recommended'
+  ],
+  "rules": {
+    "indent": ["error", "tab", {
+      "SwitchCase": 1,
+      "VariableDeclarator": 1,
+      "MemberExpression": 1,
+      "ObjectExpression": 1
+    }],
+    "no-mixed-spaces-and-tabs": ["error", true],
+    "no-duplicate-case": "error",
+    "no-spaced-func": "error",
+    "no-with": "error",
+    "block-scoped-var": "error",
+    "brace-style": ["error", "1tbs"],
+    "default-case": "error",
+
+    "react/prop-types": ["off"],
+    "no-empty": ["error", {
+      "allowEmptyCatch": true
+    }],
+    "no-unused-vars": ["warn", {
+      "vars": "all",
+      "args": "after-used",
+      "varsIgnorePattern": "^(React)$",
+      "argsIgnorePattern": "^(e|err|reject|progressEvent)$",
+    }],
+    "no-console": "off"
+  }
+}

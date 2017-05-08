@@ -46,6 +46,10 @@ requestUtil.get('/cities').then(result=>{
 requestUtil.post('/cities', data).then(result=>{
     //result in response
 });
+
+requestUtil.sequence(promiseRequests, autoMerge=true).then(result=>{
+    //a merged result or a results array
+});
 ```
 
 ## Troubleshooting
