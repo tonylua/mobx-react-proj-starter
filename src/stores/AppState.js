@@ -22,7 +22,7 @@ let AppState = observable({
 	requesting: false,
 	setRequesting: action.bound(function(bool) {
 		this.requesting = bool;
-	})
+	}),
 });
 
 export default AppState;

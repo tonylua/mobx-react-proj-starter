@@ -20,7 +20,6 @@ export default {
 		// 	let re = null;
 		// 	for (let k in rp) {
 		// 		re = new RegExp(k);
-		// 		console.log(url, re);
 		// 		if (re.test(url)) {
 		// 			reqUrl = url.replace(re, rp[k]);
 		// 			console.log(`request: ${url} --> ${reqUrl}`)

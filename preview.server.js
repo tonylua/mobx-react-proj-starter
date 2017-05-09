@@ -5,20 +5,31 @@ const { resolve, join } = require('path');
 const walk = require('klaw-sync');
 const serverConfig = require('./dev.server');
 
-const app = new express;
-app.set('view engine', 'html');
-app.set('views', __dirname + '/');
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+function runserver(port, dir, mock=false) {
+	const app = new express;
+	app.set('view engine', 'html');
+	app.set('views', __dirname + '/');
+	app.use(bodyParser.urlencoded({extended: true}));
+	app.use(bodyParser.json());
 
-const server = http.createServer(app);
-
-function runserver(port, dir) {
 	app.use(express.static(dir, {index: 'index.html'}));
 
 	app.use(new RegExp('^(?!\\' + serverConfig.mock_prefix + ')'), (req, res) => { //重定向非ajax资源
 	  res.sendFile(join(__dirname, './dist/index.html'));
 	});
+
+	if (mock) {
+		app.all('*', function(req, res, next) {  
+		    res.header("Access-Control-Allow-Origin", "http://localhost:8080");
+		    res.header("Access-Control-Allow-Credentials", true);
+		    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");  
+		    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");  
+		    res.header("Content-Type", "application/json;charset=utf-8");  
+		    next();  
+		});
+	}
+
+	const server = http.createServer(app);
 
 	const api = walk(serverConfig.mock_path)
 		.map(p=>p.path)
@@ -36,3 +47,4 @@ function runserver(port, dir) {
 }
 
 runserver(serverConfig.port, './dist');
+runserver(serverConfig.mock_port, './', true);
