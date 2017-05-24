@@ -28,7 +28,7 @@ export default {
 		// 	}
 		// }
 
-		const req = new Request(reqUrl, {
+		let reqObj = {
 			method,
 			headers: {
 				'Accept': 'application/json',
@@ -36,7 +36,10 @@ export default {
 			},
 			body: params ? JSON.stringify(params) : null,
 			credentials: 'include'
-		});
+		};
+		if (reqObj.body === null) delete reqObj.body;
+		const req = new Request(reqUrl, reqObj);
+
 		const _err = (msg, res) => {
 			if (typeof errCallback === 'function') 
 				errCallback(msg, res);
