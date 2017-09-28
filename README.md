@@ -1,4 +1,4 @@
-# mobx-react-proj-starter 
+    # mobx-react-proj-starter 
 
 > mobx+react+react_router_4+webpack2+mock_api
 
@@ -11,7 +11,14 @@
 - prod
     + `npm run preview` - start a server under /dist(http://127.0.0.1:8080)
 
+## use custom ip
+
+- for `npm start`, `npm run mock` and `npm run preview`
+- add a param ` -ip=xxx.xxx.xxx.xxx` or ` -ip=1`(auto)
+
 ## mock api
+
+*timeout is 20s*
 
 ```json
 {
@@ -50,6 +57,12 @@ requestUtil.post('/cities', data).then(result=>{
 requestUtil.sequence(promiseRequests, autoMerge=true).then(result=>{
     //a merged result or a results array
 });
+
+
+requestUtil.get('/cities', errCallback(msg, response)=>{});
+requestUtil.get('/cities').catch(ex=>{});
+requestUtil.post('/cities', data, errCallback(msg, response)=>{});
+requestUtil.post('/cities', data).catch(ex=>{});
 ```
 
 ## Troubleshooting
