@@ -1,6 +1,6 @@
 {
   "name": "mobx-react-proj-starter",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "mobx+react+react_router_4+webpack2+eslint+mock_api",
   "main": "dist/index.html",
   "scripts": {
@@ -64,12 +64,14 @@
     "mobx-react-devtools": "^4.2.11",
     "node-dev": "^3.1.3",
     "nodemon": "^1.11.0",
+    "open-browser-webpack-plugin": "0.0.5",
     "optimize-css-assets-webpack-plugin": "^1.3.1",
     "postcss-loader": "^1.3.3",
     "precommit-hook": "^3.0.0",
     "react-hot-loader": "^3.0.0-beta.6",
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",
+    "webpack-bundle-analyzer": "^2.8.2",
     "webpack": "^2.3.3",
     "webpack-dev-server": "^2.4.2",
     "webpack-merge": "^4.1.0"

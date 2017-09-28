@@ -1,10 +1,25 @@
 import 'whatwg-fetch';
 import Promise from 'native-promise-only';
-import { delay, isObject, extend } from 'lodash';
+import { keys, delay, isObject, extend } from 'lodash';
 import { mock_prefix } from '../../dev.server';
 import AppState from '../stores/AppState';
 
+const FETCH_TIMEOUT = 20 * 1000;
+const FETCH_EXCEPTION = "_fetch_timeout_";
+const _fetch = window.fetch;
+window.fetch = function() {
+	const fetchPromise = _fetch.apply(null, arguments);
+	const timeoutPromise = new Promise(function(res, rej) {
+		setTimeout(
+			()=>rej(new Error(FETCH_EXCEPTION)),
+			FETCH_TIMEOUT
+		)
+	});
+	return Promise.race([fetchPromise, timeoutPromise]);
+};
+
 export const isBadRequest = status=>(status>=400 && status<=600);
+
 export const isValidCode = code=>{
 	let c = parseInt(code); return (!isNaN(c)) && (c == 0)
 };
@@ -34,10 +49,27 @@ export default {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json',
 			},
-			body: params ? JSON.stringify(params) : null,
-			credentials: 'include'
+			body: params
+				? method === 'GET'
+					? keys(params).reduce((arr, key)=>{
+						if (!!params[key])
+							arr.push(`${key}=${params[key]}`);
+						return arr;
+					}, []).join('&')
+					: JSON.stringify(params)
+				: null,
+			credentials: 'include',
+			cache: 'reload'
 		};
-		if (reqObj.body === null) delete reqObj.body;
+		
+		if (reqObj.body === null) {
+			delete reqObj.body;
+		} else if (method === 'GET') {
+			let divSign = ~reqUrl.indexOf('?') ? '&' : '?';
+			reqUrl += divSign + reqObj.body;
+			delete reqObj.body;
+		}
+
 		const req = new Request(reqUrl, reqObj);
 
 		const _err = (msg, res) => {
@@ -83,10 +115,15 @@ export default {
 				}
 				AppState.setRequesting(false);
 				return result;
-			})/*.catch(ex=>{
-				console.warn(ex.message);
+			}).catch(ex=>{
 				AppState.setRequesting(false);
-			})*/;
+				if (ex.message === FETCH_EXCEPTION) {
+					window.alert("request timeout!");
+					return;
+				}
+				// console.warn(ex.message);
+				throw ex;
+			});
 	},
 	get(...args) {
 		return this.request('GET')(...args);

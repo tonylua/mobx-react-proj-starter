@@ -60,6 +60,7 @@
       "varsIgnorePattern": "^(React)$",
       "argsIgnorePattern": "^(e|err|reject|progressEvent)$",
     }],
-    "no-console": "off"
+    "no-console": "off",
+    "no-extra-boolean-cast": "off"
   }
 }
